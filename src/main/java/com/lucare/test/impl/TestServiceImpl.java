@@ -8,7 +8,7 @@ import com.lucare.test.api.TestService;
  */
 public class TestServiceImpl implements TestService {
     public void doTest(String param) {
-        System.out.println("this param is"+param);
+        System.out.println("this param is "+param);
         System.out.println("hahhhah");
 
         HttpInvokeHelper.setInvokeResult("ok");

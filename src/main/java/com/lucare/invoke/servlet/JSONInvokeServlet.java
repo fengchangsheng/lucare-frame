@@ -7,6 +7,10 @@ import com.lucare.invoke.*;
 import com.lucare.invoke.annotation.LoginStateType;
 import com.lucare.invoke.utils.CookieUtils;
 import com.lucare.tsession.TSessionManager;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,11 +18,10 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by Lucare.Feng on 2016/3/26.
@@ -91,6 +94,14 @@ public class JSONInvokeServlet extends AbstractJSONHttpServlet {
                 return;
             }
 
+            boolean isMultipart = ServletFileUpload.isMultipartContent(invokeHolder.getHttpRequest());
+            System.out.println(isMultipart);
+            if (isMultipart) {
+                upload("/upload/files",invokeHolder.getHttpRequest());
+            }
+
+
+
             invokeArgs = HttpInvokeHelper.extractInvokeParameters(methodHolder.getArgsNames(), methodHolder.getArgsMarkers(), invokeHolder.getHttpRequest());
             InvokeManager.registerInvokeHolder(invokeHolder);
             methodHolder.getMethod().invoke(t.getService(), invokeArgs);
@@ -158,6 +169,47 @@ public class JSONInvokeServlet extends AbstractJSONHttpServlet {
     private static void redirectLogin(InvokeHolder invokeHolder) {
         invokeHolder.setResult("/user-login.html");
         invokeHolder.setDesc(302, (String)null);
+    }
+
+    private static void upload(String urlPath,HttpServletRequest request){
+        String storeName = null;
+        // 2得到存放文件的真实路径
+        String realpath = request.getSession().getServletContext().getRealPath(urlPath);
+        System.out.println(realpath);
+        File dir = new File(realpath);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        FileItemFactory factory = new DiskFileItemFactory();
+        ServletFileUpload upload = new ServletFileUpload(factory);
+        upload.setHeaderEncoding("utf-8");
+        try {
+            List<FileItem> items = upload.parseRequest(request);
+            for (FileItem item : items) {
+                if (item.isFormField()) {
+                    String name = item.getFieldName();
+                    String value = item.getString("utf-8");
+                    System.out.println(name + "=" + value);
+                } else {
+                    //上传文件重命名再存储
+                    storeName = rename(item.getName().toString());
+                    item.write(new File(dir, storeName));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static String rename(String name) {
+        Long now = Long.parseLong(new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()));
+        Long random = (long) (Math.random() * now);
+        String fileName = now + "" + random;
+        if (name.indexOf(".") != -1) {
+            fileName += name.substring(name.lastIndexOf("."));
+        }
+        return fileName;
     }
 }
 
