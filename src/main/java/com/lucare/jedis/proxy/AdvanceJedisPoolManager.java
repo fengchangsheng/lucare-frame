@@ -2,12 +2,15 @@ package com.lucare.jedis.proxy;
 
 import com.lucare.common.utils.CommonUtils;
 import com.lucare.common.utils.DomNode;
+import com.lucare.common.utils.ReflectUtils;
 import com.lucare.common.utils.TypesUtils;
 import org.apache.commons.pool2.impl.AbandonedConfig;
+import org.apache.commons.pool2.impl.GenericObjectPool;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

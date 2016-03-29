@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mongodb>
+	<sources>
+		<db name="default">
+			<host>test.peixunshenqi.cn</host>
+			<port>37017</port>
+			<connectionsPerHost>100</connectionsPerHost>
+			<threadsAllowedToBlockForConnectionMultiplier>5</threadsAllowedToBlockForConnectionMultiplier>
+			<connectTimeout>5000</connectTimeout>
+			<description>hello</description>
+			<maxWaitTime>5000</maxWaitTime>
+		</db>
+	</sources>
+	<!-- db的默认值为default, collection默认值为class的simplename -->
+	<!-- mapping class="" id="" db="default" collection=""/-->
+	<!-- <mapping class="org.mission.share.beans.HelloBean" id="helloid"/> -->	
+</mongodb>

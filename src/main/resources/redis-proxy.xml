@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<redis>
+	<sources>
+		<source name="default">
+			<host>test.peixunshenqi.cn</host>
+			<port>36379</port>
+			<!-- <username>root</username><password>123456</password> -->
+			<maxTotal>100</maxTotal><!-- 最大数量 -->
+			<maxIdle>20</maxIdle><!-- 最大不使用的数量 -->
+			<minIdle>0</minIdle><!-- 最小不使用的数量 -->
+			<maxWaitMillis>15000</maxWaitMillis><!-- 获取对象时最大等待时间 -->
+			<minEvictableIdleTimeMillis>300000</minEvictableIdleTimeMillis>
+			<softMinEvictableIdleTimeMillis>-1</softMinEvictableIdleTimeMillis>
+			<numTestsPerEvictionRun>3</numTestsPerEvictionRun><!-- 空闲连接数量 -->
+			<testOnBorrow>false</testOnBorrow>
+			<testOnReturn>false</testOnReturn>
+			<testWhileIdle>false</testWhileIdle>
+			<timeBetweenEvictionRunsMillis>60000</timeBetweenEvictionRunsMillis>
+			<blockWhenExhausted>true</blockWhenExhausted>
+		</source>
+	</sources>
+</redis>

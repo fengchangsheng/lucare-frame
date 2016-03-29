@@ -1,6 +1,5 @@
 package com.lucare.common.utils;
 
-import com.fcs.common.exception.XmlException;
 import org.w3c.dom.*;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;

@@ -144,7 +144,7 @@ public class GenericUtils {
 
     public static <T> T parseObject(Class<?> klass, Object target) {
         Object stamp = getInstance(klass);
-        return parseObject(stamp, target);
+        return (T) parseObject(stamp, target);
     }
 
     public static Object parseObject(Object stamp, Object target) {

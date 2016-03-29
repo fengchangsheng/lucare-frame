@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<remoting>
+	<business name="user">
+		<service name="AuthService">
+			<locator>112.74.217.22:49801/user-server</locator>
+			<connTimeout>5000</connTimeout>
+			<readTimeout>10000</readTimeout>
+		</service>
+	</business>
+	<business name="organization">
+		<service name="OrganizationService">
+			<locator>112.74.217.22:49802/organization-server</locator>
+			<connTimeout>5000</connTimeout>
+			<readTimeout>10000</readTimeout>
+		</service>
+		<service name="OrganizationUserService">
+			<locator>112.74.217.22:49802/organization-server</locator>
+			<connTimeout>5000</connTimeout>
+			<readTimeout>10000</readTimeout>
+		</service>
+		<service name="OrganizationGroupService">
+			<locator>112.74.217.22:49802/organization-server</locator>
+			<connTimeout>5000</connTimeout>
+			<readTimeout>10000</readTimeout>
+		</service>
+	</business>
+</remoting>

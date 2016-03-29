@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services>
+    <service name="TestService">
+        <home-api>com.lucare.test.api.TestService</home-api>
+        <home-class>com.lucare.test.impl.TestServiceImpl</home-class>
+    </service>
+    
+</services>

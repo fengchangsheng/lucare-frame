@@ -34,7 +34,7 @@ public class JSONInvokeServlet extends AbstractJSONHttpServlet {
         String serviceName = config.getInitParameter("service");
         this.invokerName = config.getServletName();
         if(CommonUtils.isEmpty(serviceName)){
-            serviceName = invokerName.replace("Invoke","Service");
+            serviceName = invokerName.replace("Invoker","Service");
         }
         this.serviceName = serviceName;
     }
@@ -56,6 +56,7 @@ public class JSONInvokeServlet extends AbstractJSONHttpServlet {
                     resMap.put("subtime",subtime);
                     resMap.put("method", methodName);
                     resMap.put("status", Integer.valueOf(invokeHolder.getStatus()));
+                    resMap.put("result", invokeHolder.getResult());
                     resMap.put("desc",invokeHolder.getDesc());
                     String output = JSON.toJSONString(resMap);
                     response.getWriter().write(output);
